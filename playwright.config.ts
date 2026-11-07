@@ -22,6 +22,8 @@ export default defineConfig({
   // Tests share one database, so run them one at a time
   workers: 1,
   fullyParallel: false,
+  // Live sites and cloud databases can be slow: wait up to 10s for each check
+  expect: { timeout: 10_000 },
   retries: process.env.CI ? 1 : 0,
   reporter: [["list"], ["html", { open: "never" }]],
   grepInvert: newerReleases.length ? new RegExp(newerReleases.join("|")) : undefined,

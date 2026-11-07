@@ -51,10 +51,14 @@ test.describe("PUT /api/expenses/:id - edit (release 2)", () => {
 
   test("editing does not add a new row", { tag: ["@regression", "@api", "@edit", "@v2"] }, async ({ request, tracker }) => {
     const saved = await tracker.create();
-    const before = (await listExpenses(request)).length;
+    const newTitle = uniqueTitle("Once");
     await request.put(`/api/expenses/${saved.id}`, {
-      data: { title: saved.title, amount: 77, category: saved.category, date: saved.date },
+      data: { title: newTitle, amount: 77, category: saved.category, date: saved.date },
     });
-    expect((await listExpenses(request)).length).toBe(before);
+    // Look only at our own rows: the old title is gone and the new title exists exactly once
+    expect(await listExpenses(request, `?q=${encodeURIComponent(saved.title)}`)).toHaveLength(0);
+    const rows = await listExpenses(request, `?q=${encodeURIComponent(newTitle)}`);
+    expect(rows).toHaveLength(1);
+    expect(rows[0].id).toBe(saved.id);
   });
 });
