@@ -1,0 +1,28 @@
+{
+  "name": "expense-tracker-e2e",
+  "version": "1.0.0",
+  "description": "Playwright e2e tests (UI + API) for the expense tracker",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "test:api": "playwright test --grep @api",
+    "test:ui": "playwright test --grep @browser",
+    "test:development": "cross-env TEST_ENV=development playwright test",
+    "test:uat": "cross-env TEST_ENV=uat playwright test",
+    "test:qa": "cross-env TEST_ENV=qa playwright test",
+    "test:prod:smoke": "cross-env TEST_ENV=prod playwright test --grep @smoke",
+    "report": "playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@types/node": "^26.6.4",
+    "cross-env": "^7.0.3",
+    "typescript": "^7.0.2"
+  }
+}
