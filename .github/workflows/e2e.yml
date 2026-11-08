@@ -1,6 +1,9 @@
 # Runs the Playwright e2e tests against a deployed environment.
 name: E2E tests
 
+# Title shown in the Actions list, e.g. "E2E on qa (release 4, repository_dispatch)"
+run-name: E2E on ${{ github.event.inputs.env || github.event.client_payload.env || 'development' }} (release ${{ github.event.inputs.release || github.event.client_payload.release || '4' }}, ${{ github.event_name }})
+
 on:
   # Manual run from the Actions tab: pick environment, suite and release
   workflow_dispatch:
