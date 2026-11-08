@@ -9,10 +9,10 @@ if (!process.env.BASE_URL && existsSync(`.env.${env}`)) {
   process.loadEnvFile(`.env.${env}`);
 }
 
-// Which release of the app is deployed there (1, 2 or 3).
+// Which release of the app is deployed there (1, 2, 3 or 4).
 // Tests tagged with a newer release are skipped automatically.
-const release = Number(process.env.APP_RELEASE ?? "3");
-const newerReleases = [2, 3].filter((r) => r > release).map((r) => `@v${r}`);
+const release = Number(process.env.APP_RELEASE ?? "4");
+const newerReleases = [2, 3, 4].filter((r) => r > release).map((r) => `@v${r}`);
 
 // Vercel preview URLs are protected. If a bypass secret is given, send it with every request.
 const bypass = process.env.VERCEL_BYPASS_SECRET;
@@ -22,8 +22,6 @@ export default defineConfig({
   // Tests share one database, so run them one at a time
   workers: 1,
   fullyParallel: false,
-  // Live sites and cloud databases can be slow: wait up to 10s for each check
-  expect: { timeout: 10_000 },
   retries: process.env.CI ? 1 : 0,
   reporter: [["list"], ["html", { open: "never" }]],
   grepInvert: newerReleases.length ? new RegExp(newerReleases.join("|")) : undefined,

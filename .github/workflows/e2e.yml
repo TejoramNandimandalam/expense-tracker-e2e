@@ -16,8 +16,8 @@ on:
         options: [all, smoke, regression, api, ui]
         default: smoke
       release:
-        description: "Release deployed there (1, 2 or 3)"
-        default: "3"
+        description: "Release deployed there (1, 2, 3 or 4)"
+        default: "4"
   # Called by the app repo after a deployment (repository_dispatch)
   repository_dispatch:
     types: [deployment-finished]
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST_ENV: ${{ github.event.inputs.env || github.event.client_payload.env || 'development' }}
-      APP_RELEASE: ${{ github.event.inputs.release || github.event.client_payload.release || '3' }}
+      APP_RELEASE: ${{ github.event.inputs.release || github.event.client_payload.release || '4' }}
       # Only needed if Vercel Deployment Protection is on (stored as a GitHub secret)
       VERCEL_BYPASS_SECRET: ${{ secrets.VERCEL_BYPASS_SECRET }}
     steps:

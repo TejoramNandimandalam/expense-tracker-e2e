@@ -14,9 +14,9 @@ test.describe("Data and version (UI)", () => {
     await expect(app.row(title)).toBeVisible();
   });
 
-  test("the heading shows the release number", { tag: ["@regression", "@browser", "@v3"] }, async ({ page }) => {
+  test("the heading shows the release number", { tag: ["@regression", "@browser"] }, async ({ page }) => {
     const app = new ExpensePage(page);
     await app.goto();
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Expense Tracker v3");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(`Expense Tracker v${process.env.APP_RELEASE ?? "4"}`);
   });
 });

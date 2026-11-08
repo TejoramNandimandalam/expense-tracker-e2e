@@ -1,6 +1,6 @@
 # expense-tracker-e2e
 
-Playwright (TypeScript) end-to-end tests for the expense tracker: 75 tests, 42 API and 33 UI.
+Playwright (TypeScript) end-to-end tests for the expense tracker: 110 tests, 52 API and 58 UI.
 Unit tests (Vitest) live in the app repo, not here.
 
 ## Setup
@@ -28,9 +28,9 @@ PowerShell example for a feature: `npx playwright test --grep @summary`
 - Type: `@smoke` (fast checks), `@regression` (full)
 - Layer: `@api`, `@browser`
 - Feature: `@add @edit @delete @filter @search @sort @summary @validation @health`
-- Release: `@v2`, `@v3` (new in that release)
+- Release: `@v2`, `@v3`, `@v4` (new in that release)
 
-Set `APP_RELEASE` (1, 2 or 3) to the release deployed on that environment.
+Set `APP_RELEASE` (1, 2, 3 or 4) to the release deployed on that environment.
 Tests for newer releases are skipped automatically.
 
 ## Test data
